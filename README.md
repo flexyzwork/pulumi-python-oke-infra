@@ -162,24 +162,18 @@ make install
 ### 1. 새로운 스택 생성
 
 ```bash
-# 개발 스택 초기화
-pulumi stack init dev
+# 프로덕션 스택 초기화
+pulumi stack init production
 ```
 
 ### 2. 구성 값 설정
 
 ```bash
-# OCI 프로필 설정
-pulumi config set os:profile os
-
-# OCI 리전 설정
-pulumi config set os:region ap-osaka-1
-
-# OCI 컴파트먼트 ID 설정 (보안 값으로 저장)
-pulumi config set os:compartment_id ocid1.compartment.oc1..aaaaaaaay2n7r37rte2fo7ybbg6mcge44xonaskbruc7h62zeruynpgae3uq --secret
+chmod +x ./setup_config.sh
+./setup_config.sh
 ```
 
-> 📝 **참고**: 이 설정들은 `Pulumi.dev.yaml` 파일에 저장됩니다.
+> 📝 **참고**: 이 스크립트를 실행하면 `Pulumi.prod.yaml` 파일에 설정값이 저장됩니다.
 
 ### 3. 스택 관리
 
@@ -188,7 +182,7 @@ pulumi config set os:compartment_id ocid1.compartment.oc1..aaaaaaaay2n7r37rte2fo
 pulumi stack ls -a
 
 # 스택 삭제 (필요한 경우)
-pulumi stack rm dev
+pulumi stack rm prod
 ```
 
 ## 🚀 인프라 배포
@@ -505,24 +499,18 @@ make install
 ### 1. Create New Stack
 
 ```bash
-# Initialize development stack
-pulumi stack init dev
+# Initialize production stack
+pulumi stack init prod
 ```
 
 ### 2. Set Configuration Values
 
 ```bash
-# Set OCI profile
-pulumi config set os:profile os
-
-# Set OCI region
-pulumi config set os:region ap-osaka-1
-
-# Set OCI compartment ID (store as secret)
-pulumi config set os:compartment_id ocid1.compartment.oc1..aaaaaaaay2n7r37rte2fo7ybbg6mcge44xonaskbruc7h62zeruynpgae3uq --secret
+chmod +x ./setup_config.sh
+./setup_config.sh
 ```
 
-> 📝 **Note**: These settings are stored in the `Pulumi.dev.yaml` file.
+> 📝 **Note**: These settings are stored in the `Pulumi.prod.yaml` file.
 
 ### 3. Stack Management
 
