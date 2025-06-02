@@ -1,0 +1,11 @@
+name: oke-single
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: A minimal OCI Python Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: oci-python
