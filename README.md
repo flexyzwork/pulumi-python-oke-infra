@@ -163,7 +163,7 @@ make install
 
 ```bash
 # 프로덕션 스택 초기화
-pulumi stack init prod --
+pulumi stack init prod
 ```
 
 ### 2. 구성 값 설정

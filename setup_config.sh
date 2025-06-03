@@ -113,31 +113,69 @@ setup_secrets() {
 
     # SSH 키 설정
     echo ""
-    echo "SSH 공개 키를 입력하세요."
-    echo "파일에서 읽으려면 파일 경로를 입력하세요 (예: ~/.ssh/id_rsa.pub):"
-    read -r SSH_KEY_INPUT
+    echo -e "${CYAN}📋 SSH 공개 키 설정${NC}"
+    echo "SSH 공개 키를 직접 붙여넣어 주세요."
+    echo ""
+    echo -e "${YELLOW}💡 SSH 키를 가져오는 방법:${NC}"
+    echo "   - 기존 키 확인: ${GREEN}cat ~/.ssh/id_rsa.pub${NC}"
+    echo "   - 새 키 생성: ${GREEN}ssh-keygen -t rsa -b 4096 -C \"your_email@example.com\"${NC}"
+    echo "   - Ed25519 키 생성: ${GREEN}ssh-keygen -t ed25519 -C \"your_email@example.com\"${NC}"
+    echo ""
+    echo "SSH 공개 키를 붙여넣고 Enter를 두 번 누르세요:"
 
-    if [ -z "$SSH_KEY_INPUT" ]; then
+    # 여러 줄 입력 받기
+    SSH_KEY=""
+    while IFS= read -r line; do
+        if [ -z "$line" ]; then
+            break
+        fi
+        if [ -z "$SSH_KEY" ]; then
+            SSH_KEY="$line"
+        else
+            SSH_KEY="$SSH_KEY"$'\n'"$line"
+        fi
+    done
+
+    # 입력 확인
+    if [ -z "$SSH_KEY" ]; then
         log_error "SSH 키는 필수입니다."
         exit 1
     fi
 
-    # 파일 경로인지 확인
-    if [ -f "$SSH_KEY_INPUT" ]; then
-        SSH_KEY=$(cat "$SSH_KEY_INPUT")
-        log_info "파일에서 SSH 키를 읽었습니다: $SSH_KEY_INPUT"
-    else
-        SSH_KEY="$SSH_KEY_INPUT"
+    # 공백 제거 및 한 줄로 정리
+    SSH_KEY=$(echo "$SSH_KEY" | tr -d '\n' | tr -s ' ')
+
+    # SSH 키 형식 검증 (더 엄격한 체크)
+    if [[ ! "$SSH_KEY" =~ ^(ssh-rsa|ssh-ed25519|ssh-dss|ecdsa-sha2-) ]]; then
+        log_error "올바르지 않은 SSH 키 형식입니다."
+        echo "   지원되는 형식:"
+        echo "   - ssh-rsa AAAAB3... (RSA 키)"
+        echo "   - ssh-ed25519 AAAAC3... (Ed25519 키)"
+        echo "   - ecdsa-sha2-nistp256 AAAAE2... (ECDSA 키)"
+        exit 1
     fi
 
-    # SSH 키 형식 검증 (간단한 체크)
-    if [[ ! "$SSH_KEY" =~ ^(ssh-rsa|ssh-ed25519|ssh-dss|ecdsa-sha2-) ]]; then
-        log_warning "SSH 키 형식이 올바르지 않을 수 있습니다."
-        echo -n "계속하시겠습니까? [y/N]: "
-        read -r continue_anyway
-        if [[ ! "$continue_anyway" =~ ^[Yy]$ ]]; then
-            exit 1
-        fi
+    # SSH 키 길이 확인
+    key_parts=($SSH_KEY)
+    if [ ${#key_parts[@]} -lt 2 ]; then
+        log_error "SSH 키 형식이 완전하지 않습니다."
+        echo "   올바른 형식: ssh-rsa AAAAB3NzaC1yc2EAAAA... [comment]"
+        exit 1
+    fi
+
+    # 키의 유효성 간단 체크 (base64 부분)
+    key_data="${key_parts[1]}"
+    if [[ ! "$key_data" =~ ^[A-Za-z0-9+/]*={0,2}$ ]] || [ ${#key_data} -lt 50 ]; then
+        log_error "SSH 키 데이터가 올바르지 않습니다."
+        echo "   키 데이터 부분이 너무 짧거나 잘못된 문자를 포함합니다."
+        exit 1
+    fi
+
+    log_success "SSH 키 형식 검증 완료"
+    echo "   키 타입: ${key_parts[0]}"
+    echo "   키 길이: ${#key_data} 문자"
+    if [ ${#key_parts[@]} -gt 2 ]; then
+        echo "   코멘트: ${key_parts[2]}"
     fi
 
     pulumi config set --secret ssh_public_key "$SSH_KEY"
@@ -152,11 +190,12 @@ setup_general_config() {
 
     # 리전 설정
     echo "사용 가능한 OCI 리전:"
-    echo "  - ap-osaka-1 (아시아 태평양 - 오사카)"
-    echo "  - ap-seoul-1 (아시아 태평양 - 서울)"
-    echo "  - ap-tokyo-1 (아시아 태평양 - 도쿄)"
-    echo "  - us-ashburn-1 (미국 동부 - 애슈번)"
-    echo "  - us-phoenix-1 (미국 서부 - 피닉스)"
+    echo "  - ap-osaka-1 (아시아 태평양 - 오사카) 🇯🇵"
+    echo "  - ap-seoul-1 (아시아 태평양 - 서울) 🇰🇷"
+    echo "  - ap-tokyo-1 (아시아 태평양 - 도쿄) 🇯🇵"
+    echo "  - us-ashburn-1 (미국 동부 - 애슈번) 🇺🇸"
+    echo "  - us-phoenix-1 (미국 서부 - 피닉스) 🇺🇸"
+    echo "  - eu-frankfurt-1 (유럽 - 프랑크푸르트) 🇩🇪"
     echo ""
     echo -n "리전 입력 [ap-osaka-1]: "
     read -r REGION
@@ -187,6 +226,13 @@ verify_config() {
     echo "   👤 프로필: $(pulumi config get profile)"
     echo ""
 
+    # SSH 키 타입 확인 (암호화되지 않은 부분만)
+    local ssh_key=$(pulumi config get ssh_public_key 2>/dev/null || echo "")
+    if [ -n "$ssh_key" ]; then
+        local key_type=$(echo "$ssh_key" | cut -d' ' -f1)
+        echo "   🔐 SSH 키 타입: $key_type"
+    fi
+
     # 설정 파일 존재 확인
     if [ -f "config.py" ]; then
         log_info "config.py 파일이 발견되었습니다."
@@ -201,9 +247,9 @@ verify_config() {
 # 추가 도움말
 show_next_steps() {
     echo -e "${CYAN}🚀 다음 단계:${NC}"
-    echo "1. 인프라 배포: ${GREEN}pulumi up${NC}"
-    echo "2. 설정 확인: ${GREEN}pulumi config${NC}"
-    echo "3. 스택 목록: ${GREEN}pulumi stack ls${NC}"
+    echo "1. 설정 확인: ${GREEN}pulumi config${NC}"
+    echo "2. 인프라 미리보기: ${GREEN}pulumi preview${NC}"
+    echo "3. 인프라 배포: ${GREEN}pulumi up${NC}"
     echo "4. 리소스 확인: ${GREEN}pulumi stack output${NC}"
     echo ""
     echo -e "${YELLOW}💡 유용한 명령어:${NC}"
@@ -211,6 +257,11 @@ show_next_steps() {
     echo "   - pulumi config get <key>             # 설정 조회"
     echo "   - pulumi config rm <key>              # 설정 삭제"
     echo "   - pulumi stack select <stack-name>    # 스택 전환"
+    echo ""
+    echo -e "${CYAN}🔧 문제 해결:${NC}"
+    echo "   - SSH 키 오류 시: 키를 다시 설정하거나 새로 생성"
+    echo "   - OCI 인증 오류 시: 'oci setup config' 실행"
+    echo "   - 설정 초기화: 'pulumi config rm <key>' 후 재설정"
     echo ""
 }
 
@@ -220,7 +271,7 @@ main() {
     setup_secrets
     setup_general_config
     verify_config
-    log_success "모든 설정이 완료되었습니다!"
+    log_success "모든 설정이 완료되었습니다! 🎉"
     echo ""
     show_next_steps
 }
@@ -228,5 +279,8 @@ main() {
 # 오류 처리
 trap 'log_error "스크립트 실행 중 오류가 발생했습니다."; exit 1' ERR
 
+# 인터럽트 처리
+trap 'echo ""; log_info "스크립트가 중단되었습니다."; exit 130' INT
+
 # 스크립트 실행
-main
+main "$@"

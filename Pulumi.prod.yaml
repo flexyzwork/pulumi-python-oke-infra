@@ -1,7 +1,0 @@
-config:
-  oke-single:compartment_id:
-    secure: AAABAPrwpym4KtqMlN3wD2OeQsVPyGeJvbY9Fr9J2EoM/x/lGKaKJfK3ZKChs5tkdWrCw01wtrjhquIVEt9FFkAPDbL2UuzqwAUNHsaQXIiCxn/4BVt/EdXLXkppy5lXRyXMNw8fpXf02bZbZJFvuSo43A==
-  oke-single:ssh_public_key:
-    secure: AAABAEbGcV8D4qdeRFyaUDhzXGgRrIv/5XT+txWlTJ/E91NgrmRIwMrGwzKTbRTmHoc=
-  oke-single:profile: os
-  oke-single:region: ap-osaka-1
