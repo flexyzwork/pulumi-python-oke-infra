@@ -1,0 +1,277 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#0d1117"/>
+
+  <!-- Grid background -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#21262d" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+
+    <!-- Gradients for modern look -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#238636;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2ea043;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="devGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f6feb;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#388bfd;stop-opacity:0.8" />
+    </linearGradient>
+
+    <linearGradient id="ociGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f85149;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff7b72;stop-opacity:0.8" />
+    </linearGradient>
+
+    <linearGradient id="k8sGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <rect x="50" y="30" width="1100" height="60" rx="10" fill="url(#headerGrad)" filter="url(#shadow)"/>
+  <text x="600" y="50" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600">
+    Pulumi OCI OKE Infrastructure Management Architecture
+  </text>
+  <text x="600" y="75" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="14" opacity="0.9">
+    Infrastructure as Code with Automated Kubernetes Cluster Management
+  </text>
+
+  <!-- Developer Environment Section -->
+  <g id="dev-section">
+    <rect x="50" y="120" width="280" height="320" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="50" y="120" width="280" height="40" rx="10" fill="url(#devGrad)"/>
+    <text x="190" y="145" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">
+      Developer Environment
+    </text>
+
+    <!-- VS Code -->
+    <rect x="70" y="180" width="240" height="50" rx="8" fill="#21262d" stroke="#388bfd" stroke-width="1"/>
+    <circle cx="90" cy="195" r="3" fill="#1f6feb"/>
+    <text x="100" y="200" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">VS Code IDE</text>
+    <text x="100" y="215" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Python + Pulumi Extension</text>
+
+    <!-- Python Environment -->
+    <rect x="70" y="240" width="240" height="50" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <circle cx="90" cy="255" r="3" fill="#ffd700"/>
+    <text x="100" y="260" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Python Virtual Environment</text>
+    <text x="100" y="275" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">venv + Dependencies</text>
+
+    <!-- CLI Tools -->
+    <rect x="70" y="300" width="240" height="50" rx="8" fill="#21262d" stroke="#2ea043" stroke-width="1"/>
+    <circle cx="90" cy="315" r="3" fill="#2ea043"/>
+    <text x="100" y="320" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">CLI Tools</text>
+    <text x="100" y="335" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Pulumi CLI, OCI CLI, kubectl</text>
+
+    <!-- Git Repository -->
+    <rect x="70" y="360" width="240" height="50" rx="8" fill="#21262d" stroke="#a855f7" stroke-width="1"/>
+    <circle cx="90" cy="375" r="3" fill="#a855f7"/>
+    <text x="100" y="380" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Git Repository</text>
+    <text x="100" y="395" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">IaC Code + Configuration</text>
+  </g>
+
+  <!-- Pulumi Section -->
+  <g id="pulumi-section">
+    <rect x="360" y="120" width="280" height="320" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="360" y="120" width="280" height="40" rx="10" fill="url(#devGrad)"/>
+    <text x="500" y="145" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">
+      Pulumi Infrastructure Engine
+    </text>
+
+    <!-- Pulumi Stack -->
+    <rect x="380" y="180" width="240" height="50" rx="8" fill="#21262d" stroke="#1f6feb" stroke-width="1"/>
+    <circle cx="400" cy="195" r="3" fill="#1f6feb"/>
+    <text x="410" y="200" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Pulumi Stack (prod)</text>
+    <text x="410" y="215" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">State Management + Config</text>
+
+    <!-- Python Program -->
+    <rect x="380" y="240" width="240" height="50" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <circle cx="400" cy="255" r="3" fill="#ffd700"/>
+    <text x="410" y="260" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Python Program (__main__.py)</text>
+    <text x="410" y="275" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Infrastructure Definition</text>
+
+    <!-- OCI Provider -->
+    <rect x="380" y="300" width="240" height="50" rx="8" fill="#21262d" stroke="#f85149" stroke-width="1"/>
+    <circle cx="400" cy="315" r="3" fill="#f85149"/>
+    <text x="410" y="320" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">OCI Provider</text>
+    <text x="410" y="335" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Oracle Cloud Resource API</text>
+
+    <!-- Deployment Pipeline -->
+    <rect x="380" y="360" width="240" height="50" rx="8" fill="#21262d" stroke="#2ea043" stroke-width="1"/>
+    <circle cx="400" cy="375" r="3" fill="#2ea043"/>
+    <text x="410" y="380" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Deployment Pipeline</text>
+    <text x="410" y="395" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">up/destroy/refresh Commands</text>
+  </g>
+
+  <!-- OCI Cloud Section -->
+  <g id="oci-section">
+    <rect x="670" y="120" width="480" height="550" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="670" y="120" width="480" height="40" rx="10" fill="url(#ociGrad)"/>
+    <text x="910" y="145" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">
+      Oracle Cloud Infrastructure (OCI)
+    </text>
+
+    <!-- Virtual Cloud Network -->
+    <rect x="690" y="180" width="440" height="120" rx="8" fill="#0d1117" stroke="#f85149" stroke-width="1" stroke-dasharray="5,5"/>
+    <text x="700" y="200" fill="#f85149" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Virtual Cloud Network (VCN)</text>
+
+    <!-- Subnets -->
+    <rect x="710" y="220" width="200" height="60" rx="6" fill="#21262d" stroke="#ff7b72" stroke-width="1"/>
+    <text x="720" y="240" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="500">Public Subnet</text>
+    <text x="720" y="255" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">Load Balancer</text>
+    <text x="720" y="270" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">API Server</text>
+
+    <rect x="920" y="220" width="200" height="60" rx="6" fill="#21262d" stroke="#ff7b72" stroke-width="1"/>
+    <text x="930" y="240" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="500">Private Subnet</text>
+    <text x="930" y="255" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">Worker Nodes</text>
+    <text x="930" y="270" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">Pods &amp; Services</text>
+
+    <!-- OKE Cluster -->
+    <rect x="690" y="320" width="440" height="180" rx="8" fill="#0d1117" stroke="#7c3aed" stroke-width="2"/>
+    <text x="700" y="340" fill="#a855f7" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">Oracle Kubernetes Engine (OKE)</text>
+
+    <!-- Control Plane -->
+    <rect x="710" y="360" width="200" height="60" rx="6" fill="#21262d" stroke="#388bfd" stroke-width="1"/>
+    <circle cx="730" cy="375" r="3" fill="#1f6feb"/>
+    <text x="740" y="380" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="500">Control Plane</text>
+    <text x="740" y="395" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">Managed by Oracle</text>
+    <text x="740" y="407" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">API Server, etcd, Scheduler</text>
+
+    <!-- Node Pool -->
+    <rect x="920" y="360" width="200" height="120" rx="6" fill="#21262d" stroke="#2ea043" stroke-width="1"/>
+    <circle cx="940" cy="375" r="3" fill="#2ea043"/>
+    <text x="950" y="380" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="500">Node Pool</text>
+    <text x="950" y="395" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="9">VM.Standard.A1.Flex</text>
+
+    <!-- Worker Nodes -->
+    <rect x="930" y="405" width="90" height="30" rx="4" fill="#161b22" stroke="#2ea043" stroke-width="1"/>
+    <text x="975" y="425" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">Node 1</text>
+
+    <rect x="1030" y="405" width="90" height="30" rx="4" fill="#161b22" stroke="#2ea043" stroke-width="1"/>
+    <text x="1075" y="425" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">Node 2</text>
+
+    <rect x="930" y="445" width="90" height="30" rx="4" fill="#161b22" stroke="#2ea043" stroke-width="1"/>
+    <text x="975" y="465" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">Node N</text>
+
+    <!-- Security &amp; Monitoring -->
+    <rect x="690" y="520" width="440" height="80" rx="8" fill="#0d1117" stroke="#ffd700" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="700" y="540" fill="#ffd700" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Security &amp; Monitoring</text>
+
+    <rect x="710" y="555" width="130" height="35" rx="4" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <text x="775" y="575" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">IAM Policies</text>
+    <text x="775" y="585" text-anchor="middle" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="8">Access Control</text>
+
+    <rect x="850" y="555" width="130" height="35" rx="4" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <text x="915" y="575" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">Audit Logs</text>
+    <text x="915" y="585" text-anchor="middle" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="8">Monitoring</text>
+
+    <rect x="990" y="555" width="130" height="35" rx="4" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <text x="1055" y="575" text-anchor="middle" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="9">Load Balancer</text>
+    <text x="1055" y="585" text-anchor="middle" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="8">Traffic Management</text>
+  </g>
+
+  <!-- Management Tools Section -->
+  <g id="management-section">
+    <rect x="50" y="470" width="590" height="200" rx="10" fill="#161b22" stroke="#30363d" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="50" y="470" width="590" height="40" rx="10" fill="url(#k8sGrad)"/>
+    <text x="345" y="495" text-anchor="middle" fill="#ffffff" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">
+      Management &amp; Operations
+    </text>
+
+    <!-- kubectl -->
+    <rect x="70" y="530" width="170" height="60" rx="8" fill="#21262d" stroke="#1f6feb" stroke-width="1"/>
+    <circle cx="90" cy="545" r="3" fill="#1f6feb"/>
+    <text x="100" y="550" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">kubectl</text>
+    <text x="100" y="565" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Kubernetes CLI</text>
+    <text x="100" y="577" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Cluster Management</text>
+
+    <!-- Cluster API -->
+    <rect x="250" y="530" width="170" height="60" rx="8" fill="#21262d" stroke="#a855f7" stroke-width="1"/>
+    <circle cx="270" cy="545" r="3" fill="#a855f7"/>
+    <text x="280" y="550" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Cluster API</text>
+    <text x="280" y="565" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Declarative API</text>
+    <text x="280" y="577" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Lifecycle Management</text>
+
+    <!-- Monitoring -->
+    <rect x="430" y="530" width="170" height="60" rx="8" fill="#21262d" stroke="#ffd700" stroke-width="1"/>
+    <circle cx="450" cy="545" r="3" fill="#ffd700"/>
+    <text x="460" y="550" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="500">Monitoring</text>
+    <text x="460" y="565" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Resource Status</text>
+    <text x="460" y="577" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">Performance Metrics</text>
+
+    <!-- Automation Benefits -->
+    <rect x="70" y="610" width="530" height="40" rx="6" fill="#0d1117" stroke="#2ea043" stroke-width="1"/>
+    <text x="90" y="625" fill="#2ea043" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="500">Automation Benefits:</text>
+    <text x="90" y="640" fill="#c9d1d9" font-family="Inter, system-ui, sans-serif" font-size="10">
+      Time Reduction: 4-6h → 15-30min | Operational Efficiency | Cost Optimization
+    </text>
+  </g>
+
+  <!-- Arrows and Data Flow -->
+  <!-- Dev to Pulumi -->
+  <path d="M 330 285 L 360 285" stroke="#388bfd" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+
+  <!-- Pulumi to OCI -->
+  <path d="M 640 285 L 670 285" stroke="#f85149" stroke-width="2" fill="none" marker-end="url(#arrowRed)"/>
+
+  <!-- OCI to Management -->
+  <path d="M 800 500 L 800 520 L 345 520 L 345 530" stroke="#a855f7" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+
+  <!-- Management back to Dev -->
+  <path d="M 190 530 L 190 450" stroke="#2ea043" stroke-width="2" fill="none" marker-end="url(#arrowGreen)" stroke-dasharray="5,5"/>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#388bfd"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f85149"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a855f7"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2ea043"/>
+    </marker>
+  </defs>
+
+  <!-- Data Flow Labels -->
+  <rect x="335" y="270" width="40" height="20" rx="3" fill="#161b22" opacity="0.9"/>
+  <text x="355" y="283" text-anchor="middle" fill="#388bfd" font-family="Inter, system-ui, sans-serif" font-size="9">Deploy</text>
+
+  <rect x="645" y="270" width="40" height="20" rx="3" fill="#161b22" opacity="0.9"/>
+  <text x="665" y="283" text-anchor="middle" fill="#f85149" font-family="Inter, system-ui, sans-serif" font-size="9">Provision</text>
+
+  <rect x="320" y="505" width="50" height="20" rx="3" fill="#161b22" opacity="0.9"/>
+  <text x="345" y="518" text-anchor="middle" fill="#a855f7" font-family="Inter, system-ui, sans-serif" font-size="9">Manage</text>
+
+  <rect x="165" y="460" width="50" height="20" rx="3" fill="#161b22" opacity="0.9"/>
+  <text x="190" y="473" text-anchor="middle" fill="#2ea043" font-family="Inter, system-ui, sans-serif" font-size="9">Monitor</text>
+
+  <!-- Version and Footer -->
+  <text x="50" y="780" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">
+    Architecture v1.0.0 | Pulumi OCI OKE Management | Infrastructure as Code
+  </text>
+  <text x="1150" y="780" text-anchor="end" fill="#8b949e" font-family="Inter, system-ui, sans-serif" font-size="10">
+    flexyz.work
+  </text>
+</svg>

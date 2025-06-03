@@ -21,6 +21,10 @@
 비용 절감: 리소스 최적화 및 운영 인력 절약
 ```
 
+## 시스템 아키텍처 다이어그램
+![시스템 아키텍처 다이어그램](./images/kr.svg)
+
+
 ## 📋 목차
 
 1. [사전 준비](#사전-준비)
@@ -320,11 +324,11 @@ pulumi up --debug
 
 ---
 
-**작성자**: Flexyz
-**이메일**: contact@flexyz.work
-**깃헙**: https://github.com/flexyzwork
-**웹사이트**: https://flexyz.work
-**최종 업데이트**: 2025년 6월 2일
+**작성자**: Flexyz \
+**이메일**: contact@flexyz.work \
+**깃헙**: https://github.com/flexyzwork \
+**웹사이트**: https://flexyz.work \
+**최종 업데이트**: 2025년 6월 2일 \
 **버전**: 1.0.0
 
 <br />
@@ -357,6 +361,10 @@ Time Reduction: Cluster creation 4-6 hours → 15-30 minutes
 Operational Efficiency: Minimize manual work and automated failure recovery
 Cost Savings: Resource optimization and operational workforce reduction
 ```
+
+## System Architecture Diagram
+![System Architecture Diagram](./images/en.svg)
+
 
 ## 📋 Table of Contents
 
@@ -656,9 +664,9 @@ Bug reports, feature requests, and pull requests are always welcome!
 
 ---
 
-**Author**: flexyz
-**Email**: contact@flexyz.work
-**GitHub**: https://github.com/flexyzwork
-**Website**: https://flexyz.work
-**Last Updated**: 2th June 2025
+**Author**: flexyz \
+**Email**: contact@flexyz.work \
+**GitHub**: https://github.com/flexyzwork \
+**Website**: https://flexyz.work \
+**Last Updated**: 2th June 2025 \
 **Version**: 1.0.0
